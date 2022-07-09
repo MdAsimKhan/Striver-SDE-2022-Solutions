@@ -1,7 +1,4 @@
-//TLE on Code Studio
-class Solution {
-public:
-    string reverseWords(string str) {
+string reverseWords(string str) {
         int i = 0, n = str.length();
         string word="",ans="";
         //Iterate the string and keep on adding to form a word
@@ -16,11 +13,11 @@ public:
             }
             i++;
         }
-        //If not empty string then add to the result(Last word is added)
+        //till here, last n-1 words are added as there is no space after last word
+        //Last word is added
         if (word!="") {
             if (ans!="") ans = word + " " + ans;
             else ans = word;
         }
         return ans;
     }
-};
