@@ -43,7 +43,6 @@ int lengthOfLIS(vector<int>& nums) {
         vector<vector<int>> dp(n+1, vector<int>(n+1,0));
         // //n+1 since v r using prev (& ind) to build our dp arr but prev=[-1,n-1] so v +1 to           prev to bring it in [0,n]=n+1 elements
         // return lis(0,-1,nums,dp);
-        vector<int> next(n+1,0),prev(n+1,-1);
         for(int i=n-1;i>=0;i--){
             for(int j=n-1;j>=-1;j--){
                 int len=dp[i+1][j+1];
