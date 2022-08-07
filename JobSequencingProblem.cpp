@@ -12,6 +12,8 @@ int jobScheduling(vector<vector<int>> &jobs)
         maxd=max(maxd,jobs[i][0]);
     vector<int> slot(maxd,-1);
     for(int i=0;i<n;i++){
+	  //try to fit the job in the max slot
+        //if not possibe then fit in slot below
         for(int j=jobs[i][0]-1;j>=0;j--){
             if(slot[j]==-1){
                 slot[j]=i;

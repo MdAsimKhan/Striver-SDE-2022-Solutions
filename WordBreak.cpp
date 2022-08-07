@@ -14,3 +14,23 @@ void wb(int ind, string tmp, string s, vector<string>& ans, vector<string>& dict
         wb(0,"",s,ans,dict);
         return ans;
     }
+
+//dp
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<bool> check(s.size()+1,false);
+        check[0]=true;
+        for(int i=1;i<=s.size();i++){
+            for(int j=0;j<i;j++){
+                if(check[j] and find(wordDict.begin(), wordDict.end(), s.substr(j,i-j)) != wordDict.end()){
+                    check[i]=true;
+                    break;//next i
+                }
+            }
+        }
+        return check[s.size()];
+    }
+};
+
+//substr(index,length)
