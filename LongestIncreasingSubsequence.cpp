@@ -82,7 +82,7 @@ int lengthOfLIS(vector<int>& nums) {
             if(nums[i]>lis.back()) lis.push_back(nums[i]);
             else{
                 int lb = lower_bound(lis.begin(),lis.end(),nums[i]) - lis.begin();
-                lis[lb]=lis[i];
+                lis[lb]=nums[i];
             }
         }
         return lis.size();
