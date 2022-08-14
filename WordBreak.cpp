@@ -15,7 +15,7 @@ void wb(int ind, string tmp, string s, vector<string>& ans, vector<string>& dict
         return ans;
     }
 
-//dp
+//check array
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {

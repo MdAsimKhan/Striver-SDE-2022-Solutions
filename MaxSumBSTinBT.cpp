@@ -1,30 +1,17 @@
-class Node{
-    public:
-        int sm, lg, sz, sum;
-        Node(int sm, int lg, int sz, int sum){
-            this->sm=sm;
-            this->lg=lg;
-            this->sz=sz;
-            this->sum=sum;
-        }
-};
-
-class Solution {
-public:
-    Node solver(TreeNode* root){
-        if(!root) return Node(INT_MIN,INT_MAX,0,0);
-        auto lt=solver(root->left);
-        auto rt=solver(root->right);
-        //condition for BST
-        if(lt.lg < root->val < rt.sm){
-            int Sum=rt.sum+lt.sum;
-            return Node(min(lt.sm, root->val), max(rt.lg, root->val), lt.sz+rt.sz+1, Sum);
-        }
-        //condition fails
-        return Node(INT_MIN, INT_MAX, max(lt.sz,rt.sz), 0);
+vector<int> traverse(TreeNode* root, int& ans) {
+        if (!root) return {INT_MAX, INT_MIN, 0};
+        vector<int> left(traverse(root->left, ans)), right(traverse(root->right, ans));
+		// check if not a BST
+        if (left.empty() || right.empty() || root->val <= left[1] || root->val >= right[0]) return {};
+		// if BST, update ans
+        int curr_sum = left[2] + right[2] + root->val;
+        ans = max(ans, curr_sum);
+        //return {min(left.small, root), max(right.large, root)} -> learnt via striver
+        return {min(left[0], root->val), max(right[1], root->val), curr_sum};
     }
     
     int maxSumBST(TreeNode* root) {
-        return solver(root).sum;
+        int ans(0);
+        traverse(root, ans);
+        return max(0, ans);
     }
-};
