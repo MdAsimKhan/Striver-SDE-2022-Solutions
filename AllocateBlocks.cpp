@@ -27,3 +27,32 @@ long long ayushGivesNinjatest(int n, int m, vector<int> time)
     }
     return beg;
 }
+
+//alternative code
+#include<bits/stdc++.h>
+bool isPossible(vector<int>& arr, int mid, int m){
+    int stu= 1, sum=0;
+    for(int pgs: arr){
+        sum += pgs;
+        if(sum > mid){
+            sum=pgs;
+            stu++;
+        }
+    }
+    return stu<=m;
+}
+int allocateBooks(vector<int> arr, int n, int m) {
+    int mini = *max_element(begin(arr), end(arr));
+    int maxi = accumulate(begin(arr), end(arr), 0);
+    int ans=0;
+    while(mini <= maxi){
+        //mid stores max pgs per student for this trial
+        int mid = (maxi+mini)/2;
+        if(isPossible(arr,mid,m)){
+            ans=mid;
+            maxi=mid-1;
+        }
+        else mini=mid+1;
+    }
+    return ans;
+}
